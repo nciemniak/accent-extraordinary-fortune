@@ -1,15 +1,15 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-  <main class="main">
+  <main class="main home-container">
     <div>
-        <h1 class="bigtitle">Accent Extraordinary Fortune</h1>
-        <h2 class="bigsubtitle">2024 Lunar New Year</h2>
+        <h1 class="big-title">Accent Extraordinary Fortune</h1>
+        <h2 class="big-subtitle">2024 Lunar New Year</h2>
     </div>
   
     <div>
-        <h1 class="subtitle">Enter Your Birthdate</h1>
-        <form action="{% url 'app:zodiac_animal' %}" method="post">
+        <h2 class="subtitle">Enter Birthday</h2>
+        <form id="birthday-form" action="{% url 'app:zodiac_animal' %}" method="post">
             {% csrf_token %}
             <input type="date" id="birthday" name="birthday" />
             <button type="submit">Submit</button>
@@ -17,7 +17,7 @@
     </div>
   
     <div>
-        <h2 class="bigsubtitle2">Handmade by Accent Temple</h2>
+        <h2 class="credit-subtitle">Handmade by<br>Accent Temple</h2>
     </div>
   </main>
 {% endblock %}

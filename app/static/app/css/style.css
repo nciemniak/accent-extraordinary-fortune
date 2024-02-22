@@ -1,22 +1,79 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
+html {
+  height: 100%;
 }
 
 /* Set default font to VT323 */
 * {
   font-family: "VT323", monospace;
   font-weight: 400;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #000000;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: absolute;
+}
+
+.home-container {
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 96%;
+  max-width: 96%;
+  height: 96%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.big-title, .big-subtitle, .subtitle, .credit-subtitle {
+  color: white;
+  text-align:center;
+  justify-content: center;
+  display: flex;
+}
+
+.big-title {
+  font-size: 80px;
+  margin-top: 120px;
+  margin-bottom: 50px;
+  line-height:90px;
+}
+
+.big-subtitle{
+  font-size: 40px;
+  margin-bottom: 70px;
+}
+
+.subtitle {
+  opacity: 0.6;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.credit-subtitle {
+  font-size: 36px;
+  line-height: 45px;
+}
+
+#birthday-form {
+  margin-bottom: 45px;
+  font-size: 30px;
+}
+
+#birthday-form button {
+  padding: 6px 32px;
+  font-size: 25px;
+}
+
+input#birthday {
+
+  padding: 5px;
+  height: 40px;
+  font-size: 25px;
 }
