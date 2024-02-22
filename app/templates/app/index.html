@@ -1,29 +1,24 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Accent Extraordinary Fortune</title>
+{% extends 'app/base.html' %}
 
-    <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
-  
-  </head>
-  <body>
-    <h1>Accent Extraordinary Fortune</h1>
+{% block content %}
+  <main class="main">
     <div>
-      <label for="birthday">Enter Birthday</label>
-      <br>
-      <input type="date" id="birthday" name="birthday">
-      <br>
-      <button type="button">Continue</button>
-      <br><br>
-      Handmade by<br>Accent Temple
+        <h1 class="bigtitle">Accent Extraordinary Fortune</h1>
+        <h2 class="bigsubtitle">2024 Lunar New Year</h2>
     </div>
-  </body>
-</html>
-
+  
+    <div>
+        <h1 class="subtitle">Enter Your Birthdate</h1>
+        <form action="{% url 'app:zodiac_animal' %}" method="post">
+            {% csrf_token %}
+            <input type="date" id="birthday" name="birthday" />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+  
+    <div>
+        <h2 class="bigsubtitle2">Handmade by Accent Temple</h2>
+    </div>
+  </main>
+{% endblock %}
 
