@@ -1,0 +1,6 @@
+/* Set default font to VT323 */
+* {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
