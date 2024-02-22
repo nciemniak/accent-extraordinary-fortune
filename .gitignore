@@ -1,0 +1,6 @@
+# ignore 'prompt' file for GPT Engineer
+app/prompt
+
+# ignore pycache files
+__pycache__/
+app/__pycache__/
