@@ -3,20 +3,19 @@
 {% block content %}
   {% load static %}
   <div class="top-nav">
-    <a href="#" class="back-button">
+    <a href="{% url 'app:index' %}" class="back-button">
       <img src="{% static 'app/svg/backbutton.svg' %}" alt="Go Back"></img>
     </a>
   </div>
   <div class="zodiac-animal-container">
 
-
     <h2 class="title zodiac-animal">Your Zodiac Animal is...</h2>
     <div>
       <div class="center">
-        <img class="zodiac-animal-img" src="{% static 'app/images/zodiacs/earth_dragon_2.jpg' %}" alt="Go Back"></img>
+        <img class="zodiac-animal-img" src="{% static zodiac.image_url %}" alt="Go Back"></img>
       </div>
       <br>
-      <h2 class="zodiac-animal big-subtitle">WATER DOG!</h2>
+      <h2 class="zodiac-animal big-subtitle">{{ zodiac.title }}</h2>
       <br>
     </div>
 
