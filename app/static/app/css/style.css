@@ -1,5 +1,9 @@
+/********** Common ***********/
+
 html {
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* Set default font to VT323 */
@@ -14,66 +18,201 @@ html {
 body {
   background-color: #000000;
   width: 100%;
+  height: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  position: absolute;
+  align-items: center;
 }
 
-.home-container {
-  justify-content: space-around;
-  align-items: center;
+.center {
   text-align: center;
-  width: 96%;
-  max-width: 96%;
-  height: 96%;
-  margin: auto;
+}
+
+.top-nav {
+  height: 70px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.big-title, .big-subtitle, .subtitle, .credit-subtitle {
+.back-button {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 20px;
+  padding-top:3px;
+}
+
+.back-button img {
+  width: 24px;
+}
+
+
+/********** Home Page ***********/
+
+.home-container {
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.big-title, .title, .big-subtitle, .subtitle, .credit-subtitle {
   color: white;
   text-align:center;
   justify-content: center;
-  display: flex;
 }
 
-.big-title {
-  font-size: 80px;
-  margin-top: 120px;
-  margin-bottom: 50px;
-  line-height:90px;
+.home.big-title {
+  font-size: 65px;
+  line-height: 70px;
+  margin-top: 90px;
+  margin-bottom: 20px;
+  overflow-x: hidden;
 }
 
-.big-subtitle{
-  font-size: 40px;
-  margin-bottom: 70px;
+.home.big-subtitle{
+  font-size: 32px;
+  margin-bottom: 30px;
 }
 
 .subtitle {
   opacity: 0.6;
-  font-size: 30px;
-  margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 15px;
 }
 
 .credit-subtitle {
-  font-size: 36px;
-  line-height: 45px;
+  font-size: 28px;
+  line-height: 35px;
+  margin-bottom: 100px;
 }
 
 #birthday-form {
-  margin-bottom: 45px;
+  margin-bottom: 20px;
   font-size: 30px;
 }
 
 #birthday-form button {
   padding: 6px 32px;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 input#birthday {
-
   padding: 5px;
   height: 40px;
-  font-size: 25px;
+  font-size: 20px;
+}
+
+/* Small devices (phones, 430px and up) */
+@media (min-width: 430px) {
+  .big-title {
+    font-size: 80px;
+    line-height: 90px;
+    margin-top: 120px;
+    margin-bottom: 40px;
+  }
+
+  .big-subtitle {
+    font-size: 40px;
+  }
+
+  .credit-subtitle {
+    font-size: 36px;
+    line-height: 45px;
+    margin-bottom: 130px;
+  }
+
+  .subtitle {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  #birthday-form button {
+    font-size: 25px;
+  }
+  
+  input#birthday {
+    font-size: 25px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* CSS styles for medium devices */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* CSS styles for large devices */
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  /* CSS styles for extra large devices */
+}
+
+
+/********** Zodiac Animal Page ***********/
+
+.zodiac-animal-container {
+  align-items: center;
+  width: 100%;
+  height: -webkit-calc(100% - 70px);
+  height:    -moz-calc(100% - 70px);
+  height:         calc(100% - 70px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.title.zodiac-animal {
+  font-size: 28px;
+  margin-bottom: 60px;
+}
+
+.traits.zodiac-animal {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.big-subtitle.zodiac-animal {
+  font-size: 60px;
+}
+
+.subtitle.zodiac-animal {
+  margin-bottom: 0px;
+}
+
+.zodiac-animal-img {
+  max-width: 70%;
+}
+
+p.zodiac-animal.next-form {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: 30px;
+}
+
+.zodiac-animal.next-form img {
+  width: 16px;
+  margin-left: 5px;
+  position: relative;
+  top: 3px;
+}
+
+#fried-dumpling {
+  width: 38px;
+  position: relative;
+  top: 12px;
 }

@@ -10,9 +10,8 @@ def index(request):
     return render(request, "app/index.html", context)
 
 
-def zodiac_animal(request):
+def zodiac(request):
     birthday = request.POST["birthday"]
-    breakpoint()
 
     context = { "test": "test text" }
-    return render(request, "app/zodiac_animal.html", context)
+    return render(request, "app/zodiac.html", context)

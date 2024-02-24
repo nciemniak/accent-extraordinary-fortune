@@ -1,27 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Accent Extraordinary Fortune</title>
+{% extends 'app/base.html' %}
 
-    <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
-  
-  </head>
-  <body>
-    <h2>Your Zodiac Animal is</h2>
+{% block content %}
+  {% load static %}
+  <div class="top-nav">
+    <a href="#" class="back-button">
+      <img src="{% static 'app/svg/backbutton.svg' %}" alt="Go Back"></img>
+    </a>
+  </div>
+  <div class="zodiac-animal-container">
+
+
+    <h2 class="title zodiac-animal">Your Zodiac Animal is...</h2>
     <div>
-      [image]
+      <div class="center">
+        <img class="zodiac-animal-img" src="{% static 'app/images/zodiacs/earth_dragon_2.jpg' %}" alt="Go Back"></img>
+      </div>
       <br>
-      <h2>WATER DOG!</h2>
+      <h2 class="zodiac-animal big-subtitle">WATER DOG!</h2>
       <br>
-      See what you look like as your zodiac animal! >
     </div>
-  </body>
-</html>
+
+    <div>
+      <h2 class="zodiac-animal subtitle">Common Traits</h2>
+      <h2 class="traits zodiac-animal">
+        Happy
+        <img id="fried-dumpling" src="{% static 'app/images/fried_dumpling.jpeg' %}"></img>
+        Cute
+      </h2>
+    </div>
+
+    <p class="zodiac-animal next-form">
+      <span>See what you look like as your zodiac animal</span>
+      <img src="{% static 'app/svg/next.svg' %}"></img>
+    </p>
+  </div>
+  
+{% endblock %}
 
 
