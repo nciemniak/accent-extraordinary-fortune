@@ -10,11 +10,33 @@
       <h2 class="upload-selfie title">
         See what you look like as your zodiac animal!
       </h2>
-      <h2 class="select-image">
-        <img id="upload-image-icon" src="{% static 'app/svg/plus_sign.svg' %}"></img>
-        <span>Choose your photo</span>
-        <input hidden type="file" accept="image/*" id="image-input" capture="camera" onchange="handleImageUpload()">
-      </h2>
+      <div class="btn-upload" onclick="triggerFileInput()">
+        <h2 class="select-image">
+          <img id="upload-image-icon" src="{% static 'app/svg/plus_sign.svg' %}"></img>
+          <span>Choose your photo</span>
+        </h2>
+      </div>
+
+      <form id="tempform" hidden action="{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac_id }}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button id="upload-image" hidden type="submit">Upload</button>
+      </form>
     </div>
   </div>
+
+  <script>
+    function triggerFileInput() {
+        $('#id_image').click();
+    }
+
+    $(document).ready(function() {
+    // Automatically upload when an image is selected 
+    $('#id_image').change(function() {
+        if ($(this).val() !== '') {
+            $('#upload-image').click();
+        }
+    });
+});
+  </script>
 {% endblock %}
