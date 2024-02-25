@@ -30,4 +30,6 @@ def zodiac(request):
 
 
 def upload_selfie(request):
-  return render(request, "app/upload_selfie.html", { "show_navbar": True })
+  zodiac_id = request.GET.get("zodiac_id", None)
+
+  return render(request, "app/upload_selfie.html", { "show_navbar": True, "zodiac_id": zodiac_id })

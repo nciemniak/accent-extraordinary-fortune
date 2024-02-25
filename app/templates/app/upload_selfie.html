@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %}
 
-{% block back_button_url %}{% url 'app:zodiac' %}?zodiac_id={{ 1 }}{% endblock %}
+{% block back_button_url %}{% url 'app:zodiac' %}?zodiac_id={{ zodiac_id }}{% endblock %}
 
 {% block content %}
   {% load static %}
