@@ -6,6 +6,11 @@ html {
   overflow-x: hidden;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 /* Set default font to VT323 */
 * {
   font-family: "VT323", monospace;
@@ -174,21 +179,22 @@ input#birthday {
 }
 
 .title.zodiac-animal {
-  font-size: 28px;
+  font-size: 8vw;
   margin-bottom: 60px;
 }
 
 .traits.zodiac-animal {
-  font-size: 28px;
+  font-size: 8vw;
   margin-bottom: 30px;
   color: white;
 }
 
 .big-subtitle.zodiac-animal {
-  font-size: 60px;
+  font-size: 15vw;
 }
 
 .subtitle.zodiac-animal {
+  font-size: 7vw;
   margin-bottom: 0px;
 }
 
@@ -198,7 +204,7 @@ input#birthday {
 
 p.zodiac-animal.next-form {
   color: white;
-  font-size: 16px;
+  font-size: 4.2vw;
   margin-bottom: 30px;
   margin-left: auto;
   margin-right: 30px;
@@ -215,4 +221,53 @@ p.zodiac-animal.next-form {
   width: 38px;
   position: relative;
   top: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
+
+/* XS 2: Phones, 410px and up */ 
+@media (min-width: 390px) and (max-width: 767.98px) {
+  .title.zodiac-animal {
+    margin-bottom: 80px;
+    margin-top: 10px;
+  }
+
+  .subtitle.zodiac-animal {
+    margin-bottom: 1.5vh;
+  }
+  
+}
+
+/********** Upload Selfie Page ***********/
+
+.upload-selfie-container {
+  align-items: center;
+  width: 100%;
+  height: -webkit-calc(100% - 90px);
+  height:    -moz-calc(100% - 90px);
+  height:         calc(100% - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.title.upload-selfie {
+  margin-top: 18vh;
+  font-size: 12vw;
+}
+
+#upload-image-icon {
+  width: 30px;
+  position: relative;
+  top: 7px;
+}
+
+.select-image {
+  font-size: 8vw;
+  text-align: center;
+  color: white;
+  margin-top: 8vh;
+}
+

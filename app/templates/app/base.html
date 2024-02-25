@@ -14,11 +14,17 @@
 
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/home.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/globals.css' %}">
 
 </head>
 <body>
+  {% if show_navbar %}
+    <div class="top-nav">
+      <a href="{% block back_button_url %}{% url 'app:index' %}{% endblock %}" class="back-button">
+        <img src="{% static 'app/svg/backbutton.svg' %}" alt="Go Back"></img>
+      </a>
+    </div>
+  {% endif %}
+
   {% block content %}{% endblock %}
 </body>
 </html>

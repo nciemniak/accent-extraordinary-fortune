@@ -1,19 +1,22 @@
 {% extends 'app/base.html' %}
 
+{% block show_navbar %}True{% endblock %}
+
 {% block content %}
   {% load static %}
-  <div class="top-nav">
-    <a href="{% url 'app:index' %}" class="back-button">
-      <img src="{% static 'app/svg/backbutton.svg' %}" alt="Go Back"></img>
-    </a>
-  </div>
+
   <div class="zodiac-animal-container">
 
     <h2 class="title zodiac-animal">Your Zodiac Animal is...</h2>
     <div>
       <div class="center">
-        <img class="zodiac-animal-img" src="{% static zodiac.image_url %}" alt="Go Back"></img>
+        <img class="zodiac-animal-img" src="{% static zodiac.image_url %}"></img>
       </div>
+
+      <!-- {% for z in all_zodiacs %}
+      <img class="zodiac-animal-img" src="{% static z.image_url %}"></img>
+      {% endfor %} -->
+
       <br>
       <h2 class="zodiac-animal big-subtitle">{{ zodiac.title }}</h2>
       <br>
@@ -22,18 +25,23 @@
     <div>
       <h2 class="zodiac-animal subtitle">Common Traits</h2>
       <h2 class="traits zodiac-animal">
-        Happy
+        {{ zodiac.trait_1 }}
         <img id="fried-dumpling" src="{% static 'app/images/fried_dumpling.jpeg' %}"></img>
-        Cute
+        {{ zodiac.trait_2 }}
       </h2>
     </div>
 
     <p class="zodiac-animal next-form">
-      <span>See what you look like as your zodiac animal</span>
-      <img src="{% static 'app/svg/next.svg' %}"></img>
+      <a href="{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac.id }}">
+        <span>See what you look like as your zodiac animal</span>
+        <img src="{% static 'app/svg/next.svg' %}"></img>
+      </a>
     </p>
   </div>
-  
+
+  <script>
+
+  </script>
 {% endblock %}
 
 

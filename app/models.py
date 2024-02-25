@@ -7,6 +7,8 @@ class Zodiac(models.Model):
   animal = models.CharField(max_length=200)
   start_date = models.DateField()
   end_date = models.DateField()
+  trait_1 = models.CharField(max_length=200, default="")
+  trait_2 = models.CharField(max_length=200, default="")
 
   @property
   def image_url(self):

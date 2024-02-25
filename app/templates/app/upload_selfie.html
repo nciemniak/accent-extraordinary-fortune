@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+
+{% block back_button_url %}{% url 'app:zodiac' %}?zodiac_id={{ 1 }}{% endblock %}
+
+{% block content %}
+  {% load static %}
+
+  <div class="upload-selfie-container">
+    <div>
+      <h2 class="upload-selfie title">
+        See what you look like as your zodiac animal!
+      </h2>
+      <h2 class="select-image">
+        <img id="upload-image-icon" src="{% static 'app/svg/plus_sign.svg' %}"></img>
+        <span>Choose your photo</span>
+        <input hidden type="file" accept="image/*" id="image-input" capture="camera" onchange="handleImageUpload()">
+      </h2>
+    </div>
+  </div>
+{% endblock %}

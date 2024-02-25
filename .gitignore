@@ -7,3 +7,4 @@ app/__pycache__/
 app/static/app/css/reference.css
 chinese_zodiac_table.csv
 accent_extraordinary_fortune/import_data.sql
+chinese_zodiac_table_update1.csv
