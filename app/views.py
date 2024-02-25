@@ -5,6 +5,7 @@ from django.utils.dateparse import parse_date
 from datetime import datetime
 
 from .models import Zodiac
+from .forms import ImageForm
 
 # testing
 import pdb
@@ -30,6 +31,19 @@ def zodiac(request):
 
 
 def upload_selfie(request):
-  zodiac_id = request.GET.get("zodiac_id", None)
+  if request.method == 'POST':
+    form = ImageForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
 
-  return render(request, "app/upload_selfie.html", { "show_navbar": True, "zodiac_id": zodiac_id })
+  zodiac_id = request.GET.get("zodiac_id", None)
+  form = ImageForm()
+
+  return render(request, "app/upload_selfie.html", { "show_navbar": True, "zodiac_id": zodiac_id, "form": form })
+
+
+def result(request):
+  if request.method == 'POST':
+    form = ImageForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()

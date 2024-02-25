@@ -265,9 +265,14 @@ p.zodiac-animal.next-form {
 }
 
 .select-image {
+  cursor: pointer;
   font-size: 8vw;
   text-align: center;
   color: white;
   margin-top: 8vh;
+}
+
+#id_image {
+  display: none;
 }
 

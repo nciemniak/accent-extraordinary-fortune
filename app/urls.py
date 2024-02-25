@@ -7,4 +7,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("zodiac", views.zodiac, name="zodiac"),
     path("upload_selfie", views.upload_selfie, name="upload_selfie"),
+    path("result", views.result, name="result"),
 ]

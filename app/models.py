@@ -18,3 +18,8 @@ class Zodiac(models.Model):
   def title(self):
     text = f"{self.element} {self.animal}!"
     return text.upper()
+  
+
+class Image(models.Model):
+    image = models.ImageField(upload_to='app/static/app/images/temp')
+    type = models.CharField(max_length=200) # user photo or ai generation?
