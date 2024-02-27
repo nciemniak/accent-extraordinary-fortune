@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "wsgi.py",
+      "src": "accent_extraordinary_fortune/wsgi.py",
       "use": "@vercel/python",
       "config": {"maxLambdaSize": "15mb", "runtime": "python3.11.7"}
     },
@@ -17,10 +17,10 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "wsgi.py"
+      "dest": "accent_extraordinary_fortune/wsgi.py"
     },
     {
-      "src": "/staticfiles/(.*)",
+      "src": "accent_extraordinary_fortune/staticfiles/(.*)",
       "dest": "/static/$1"
     }
   ]
