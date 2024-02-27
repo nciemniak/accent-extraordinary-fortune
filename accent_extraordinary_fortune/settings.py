@@ -29,13 +29,13 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 MYMIDJOURNEY_API_KEY = os.environ.get('MYMIDJOURNEY_API_KEY')
 
-ALLOWED_HOSTS = [".vercel.app", ".now.sh"]
+ALLOWED_HOSTS = [".vercel.app", ".now.sh", "localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "whitenoise.runserver_nostatic"
+    "whitenoise.runserver_nostatic",
     'app.apps.AppConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
