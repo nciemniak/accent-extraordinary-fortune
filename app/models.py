@@ -12,7 +12,7 @@ class Zodiac(models.Model):
 
   @property
   def image_url(self):
-    return f"app/images/zodiac_animals/{self.element}_{self.animal}.jpeg"
+    return f"app/images/zodiac_animals/{self.element.lower()}_{self.animal.lower()}.jpeg"
   
   @property
   def title(self):
