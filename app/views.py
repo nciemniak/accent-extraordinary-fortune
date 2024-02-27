@@ -1,6 +1,7 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils.dateparse import parse_date
+from .services import MyMidjourneyAPI
 
 from datetime import datetime
 
@@ -44,6 +45,31 @@ def upload_selfie(request):
 
 def result(request):
   if request.method == 'POST':
+    zodiac_id = request.POST.get("zodiac_id", None)
+
     form = ImageForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
+        
+        # Initialize the MyMidjourneyImageToImageAPI service
+        mymidjourney_api = MyMidjourneyAPI()
+        # Perform image transformation
+        message_id = mymidjourney_api.image_to_image()
+
+        return render(request, "app/result.html", { "show_navbar": True, "message_id": message_id, "zodiac_id": zodiac_id })
+  elif request.method == 'GET':
+    return render(request, "app/result.html", { "show_navbar": True, 'message_id': 111 })
+
+
+def midjourney_task_progress(request):
+  message_id = request.GET.get("message_id", None)
+
+  mymidjourney_api = MyMidjourneyAPI()
+  data = mymidjourney_api.progress(message_id)
+
+  response =  JsonResponse(data)
+  return response
+
+
+def test_view(request):
+  return render(request, "app/test.html")

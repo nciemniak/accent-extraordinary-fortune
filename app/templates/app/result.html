@@ -1,0 +1,68 @@
+{% extends 'app/base.html' %}
+
+{% block back_button_url %}{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac_id }}{% endblock %}
+
+{% block content %}
+  {% load static %}
+  <div class="result-container">
+    <h2 class="result title">Your Zodiac Persona!</h2>
+    <div id="ai-image-container">
+      <div id="ai-image-div">
+      </div>
+    </div>
+
+    <img id="gold-bullion" src="{% static 'app/images/gold_bullion.png' %}"></img>
+  </div>
+
+  <script>
+
+    function checkMidjourneyTaskProgress() {
+      // URL for the Django view
+      domain = getDomain();
+      var djangoViewUrl = `http://${domain}/midjourney_task_progress?message_id={{ message_id }}`;
+
+      // Make an AJAX call using the fetch API
+      fetch(djangoViewUrl, {
+        method: 'GET',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Handle the data received from the Django view
+        console.log('Data from Django:', data);
+        // You can update your UI or perform other actions based on the data
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    }
+
+    function getDomain() {
+      if (window.location.hostname == 'localhost' || window.location.hostname == '127.0.0.1') {
+        return window.location.host;
+      } else {
+        return window.location.hostname;
+      }
+    }
+
+    // Call the function immediately
+    checkMidjourneyTaskProgress();
+
+    // Set up an interval to call the function every 3 seconds (3000 milliseconds)
+    var intervalId = setInterval(checkMidjourneyTaskProgress, 3000);
+
+    // Clear the interval after a certain number of repetitions
+    setTimeout(function() {
+        clearInterval(intervalId);
+    }, 9000); // Stop after 30 seconds (10 repetitions)
+  </script>
+
+{% endblock %}

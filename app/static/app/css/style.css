@@ -55,7 +55,9 @@ body {
 /********** Home Page ***********/
 
 .home-container {
-  align-items: center;
+  background-image: url(../images/home_background_mobile.png);
+  background-size:cover;
+  background-position:left;
   text-align: center;
   width: 100%;
   max-width: 100%;
@@ -87,7 +89,7 @@ body {
 }
 
 .subtitle {
-  opacity: 0.6;
+  opacity: 0.85;
   font-size: 24px;
   margin-bottom: 15px;
 }
@@ -148,8 +150,10 @@ input#birthday {
 }
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  /* CSS styles for medium devices */
+@media (min-width: 768px) {
+  .home-container {
+    background-image: url(../images/home_background.png);
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -241,6 +245,9 @@ p.zodiac-animal.next-form {
 /********** Upload Selfie Page ***********/
 
 .upload-selfie-container {
+  background-image: url(../images/selfie_upload_bg_2.png);
+  background-size:cover;
+  background-position: center;
   align-items: center;
   width: 100%;
   height: -webkit-calc(100% - 90px);
@@ -274,5 +281,40 @@ p.zodiac-animal.next-form {
 
 #id_image {
   display: none;
+}
+
+
+/********** Result Page ***********/
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.title.result {
+  font-size: 10vw;
+  margin-bottom: 3vh;
+}
+
+#ai-image-container {
+  border-radius: 25px;
+  margin-left: 8vw;
+  margin-right: 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  position: relative;
+  width: 84vw;
+  height: 84vw;
+  overflow: hidden;
+}
+
+#ai-image-div {
+  background-image: url(https://cdn.discordapp.com/attachments/1124768570157564029/1211759743371321424/ramlimunanx573_objectcharacter_chinese_zodiac_dragon_pixel_art__1b78de52-2033-44d0-a8c3-d2c500f0dbca.png?ex=65ef5e34&is=65dce934&hm=a924c264c19e1268d859acc21c79cf59edd3e43a195fabf258a5cb2cf7cf38e1&width=1024&height=1024);
+  background-size: cover;
+  width: 168vw;
+  height: 84vw;
 }
 

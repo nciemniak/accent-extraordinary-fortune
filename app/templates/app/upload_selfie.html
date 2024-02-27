@@ -17,9 +17,10 @@
         </h2>
       </div>
 
-      <form id="tempform" hidden action="{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac_id }}" method="post" enctype="multipart/form-data">
+      <form id="upload-image-form" hidden action="{% url 'app:result' %}?zodiac_id={{ zodiac_id }}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
+        <input type="hidden" id="zodiac_id" name='zodiac_id' value="{{ zodiac_id }}">
         <button id="upload-image" hidden type="submit">Upload</button>
       </form>
     </div>
