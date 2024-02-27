@@ -153,4 +153,9 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Turn the Midjourney API Image Generation on and off (True / False)
+IMAGE_GENERATION_ON = os.environ.get('IMAGE_GENERATION_ON', '') != 'False'
+
+ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
+
 

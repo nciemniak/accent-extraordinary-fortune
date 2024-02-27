@@ -1,9 +1,5 @@
 from django.conf import settings
 import requests
-from django.http import JsonResponse
-from django.views import View
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 
 class MyMidjourneyAPI:
   def __init__(self):
@@ -21,11 +17,15 @@ class MyMidjourneyAPI:
     }
 
     try:
-      breakpoint()
-      response = requests.post(url, json=data, headers=self.headers)
-      response.raise_for_status()
-      response_json = response.json()
-      message_id = response_json['messageId']
+      if settings.IMAGE_GENERATION_ON:
+        response = requests.post(url, json=data, headers=self.headers)
+        response.raise_for_status()
+        response_json = response.json()
+        message_id = response_json['messageId']
+      else:
+        # dummy message id
+        message_id = '8facad15-0c29-41a2-890c-036546568336'
+      
       return message_id
     except requests.exceptions.RequestException as e:
       # Handle any exceptions (e.g., connection error, timeout)
@@ -37,7 +37,13 @@ class MyMidjourneyAPI:
 
     try:
       response = requests.get(url, headers=self.headers)
-      return response.json()
+      data = response.json()
+
+      if 'progress' in data and data['progress'] == 100:
+        return {"data": data['uri']}
+      else:
+        return {"data": "loading"}
+      
     except requests.exceptions.RequestException as e:
       print(f"Error: {e}")
       return None

@@ -38,7 +38,10 @@
       .then(data => {
         // Handle the data received from the Django view
         console.log('Data from Django:', data);
-        // You can update your UI or perform other actions based on the data
+        
+        if (data.data !== 'loading') {
+          displayGeneratedImage(data.data);
+        }
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -53,16 +56,26 @@
       }
     }
 
-    // Call the function immediately
-    checkMidjourneyTaskProgress();
+    var intervalId = setInterval(function () {
+      checkMidjourneyTaskProgress();
+      //TO DO: check if the generated image was displayed/loading was turned off
+      var check = '';
 
-    // Set up an interval to call the function every 3 seconds (3000 milliseconds)
-    var intervalId = setInterval(checkMidjourneyTaskProgress, 3000);
+      if (check == 'stop') {
+          clearInterval(intervalId);
+          console.log("Interval stopped");
+      }
+    }, 3000);
 
     // Clear the interval after a certain number of repetitions
     setTimeout(function() {
         clearInterval(intervalId);
-    }, 9000); // Stop after 30 seconds (10 repetitions)
+    }, 9000); // Stop after 9 seconds (3 repetitions)
+
+    function displayGeneratedImage(uri) {
+      // Set background image
+      $('#ai-image-div').css('background-image', 'url(' + uri + ')');
+    }
   </script>
 
 {% endblock %}
