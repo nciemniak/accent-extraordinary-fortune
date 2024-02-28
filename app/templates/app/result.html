@@ -34,9 +34,6 @@
       fetch(djangoViewUrl, {
         method: 'GET',
         mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
       })
       .then(response => {
         if (!response.ok) {
