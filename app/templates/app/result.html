@@ -28,7 +28,7 @@
     function checkMidjourneyTaskProgress() {
       // URL for the Django view
       domain = getDomain();
-      var djangoViewUrl = `http://${domain}/midjourney_task_progress?message_id={{ message_id }}`;
+      var djangoViewUrl = `https://${domain}/midjourney_task_progress?message_id={{ message_id }}`;
 
       // Make an AJAX call using the fetch API
       fetch(djangoViewUrl, {
