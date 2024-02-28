@@ -3,73 +3,79 @@
 {% block back_button_url %}{% url 'app:zodiac' %}?zodiac_id={{ zodiac_id }}{% endblock %}
 
 {% block content %}
-  {% load static %}
+{% load static %}
 
-  <div class="upload-selfie-container">
-    <div>
-      <h2 class="upload-selfie title">
-        See what you look like as your zodiac animal!
+<div class="upload-selfie-container">
+  <div>
+    <h2 class="upload-selfie title">
+      See what you look like as your zodiac animal!
+    </h2>
+    <div class="btn-upload" onclick="triggerFileInput()">
+      <h2 class="select-image">
+        <img id="upload-image-icon" src="{% static 'app/svg/plus_sign.svg' %}"></img>
+        <span>Choose your photo</span>
       </h2>
-      <div class="btn-upload" onclick="triggerFileInput()">
-        <h2 class="select-image">
-          <img id="upload-image-icon" src="{% static 'app/svg/plus_sign.svg' %}"></img>
-          <span>Choose your photo</span>
-        </h2>
-      </div>
-
-      <form id="upload-image-form" hidden action="{% url 'app:result' %}?zodiac_id={{ zodiac_id }}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <input type="hidden" id="zodiac_id" name='zodiac_id' value="{{ zodiac_id }}">
-        <input type="hidden" id="uploaded_image_url" name='uploaded_image_url'>
-        <button id="upload-image" hidden type="submit">Upload</button>
-      </form>
     </div>
+
+    <form id="upload-image-form" hidden action="{% url 'app:result' %}?zodiac_id={{ zodiac_id }}" method="post"
+      enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <input type="hidden" id="zodiac_id" name='zodiac_id' value="{{ zodiac_id }}">
+      <input type="hidden" id="uploaded_image_url" name='uploaded_image_url'>
+      <button id="upload-image" hidden type="submit">Upload</button>
+    </form>
   </div>
+</div>
 
-  <script>
-    function triggerFileInput() {
-        $('#id_image').click();
-    }
+<script>
+  function triggerFileInput() {
+    $('#id_image').click();
+  }
 
-    $(document).ready(function() {
-    // Upload to temporary location
-    $('#id_image').change(function() {
-      uploadImageToTempURL();
+  $(document).ready(function () {
+    $('#id_image').change(function () {
+      var fileInput = document.getElementById('id_image');
 
+      if (fileInput.files.length > 0) {
+        var file = fileInput.files[0];
+        uploadFile(file);
+      }
+      
     });
   });
 
-  function uploadImageToTempURL() {
-    var fileInput = document.getElementById('id_image');
-    
-    // Check if a file is selected
-    if (fileInput.files.length > 0) {
-        var file = fileInput.files[0];
+  // *********** Upload file to Cloudinary ******************** //
+  const cloudName = 'nciemniak';
+  const unsignedUploadPreset = 'oafxfgsy';
 
-        // Create FormData object and append the file
-        var formData = new FormData();
-        formData.append('file', file, file.name);
+  function uploadFile(file) {
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    const fd = new FormData();
+    fd.append('upload_preset', unsignedUploadPreset);
+    fd.append('tags', 'browser_upload'); // Optional - add tags for image admin in Cloudinary
+    fd.append('file', file);
 
-        // Make a POST request using Fetch API
-        fetch('https://tmpfiles.org/api/v1/upload', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            initialUrl = data.data.url;
-            var modifiedUrl = initialUrl.replace(/^(https?:\/\/[^\/]+)(\/.*)?$/, '$1/' + 'dl' + '$2');
+    fetch(url, {
+      method: 'POST',
+      body: fd,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // File uploaded successfully
+        const url = data.secure_url;
+        // Create a thumbnail of the uploaded image, with 150px width
+        const tokens = url.split('/');
+        tokens.splice(-2, 0, 'w_600');
+        var final_url = tokens.join('/');
 
-            $('#uploaded_image_url').val(modifiedUrl);
-            $('#upload-image').click();
-        })
-        .catch(error => {
-            console.error('Error uploading image:', error);
-        });
-    } else {
-        console.warn('No file selected.');
-    }
-}
-  </script>
+        $('#uploaded_image_url').val(final_url);
+        $('#upload-image').click();
+      })
+      .catch((error) => {
+        console.error('Error uploading the file:', error);
+      });
+  }
+
+</script>
 {% endblock %}

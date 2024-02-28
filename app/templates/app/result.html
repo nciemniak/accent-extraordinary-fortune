@@ -5,9 +5,11 @@
 {% block content %}
   {% load static %}
   <div hidden class="result-container">
-    <h2 class="result title">Your Zodiac Persona!</h2>
-    <div id="ai-image-container">
-      <div id="ai-image-div">
+    <div>
+      <h2 class="result title">Your Zodiac Persona!</h2>
+      <div id="ai-image-container">
+        <div id="ai-image-div">
+        </div>
       </div>
     </div>
     <img id="gold-bullion" src="{% static 'app/images/gold_bullion.png' %}"></img>
@@ -48,6 +50,8 @@
         
         if (data.data !== 'loading') {
           displayGeneratedImage(data.data);
+          $('.loading-container').hide();
+          $('.result-container').css('display', 'flex');
         }
       })
       .catch(error => {
@@ -65,9 +69,9 @@
 
     // poll the API every 3 seconds for generation progress
     var intervalId = setInterval(function () {
-      // checkMidjourneyTaskProgress();
+      checkMidjourneyTaskProgress();
 
-      var isLoading = $('#result-container').is(':hidden');
+      var isLoading = $('.result-container').is(':hidden');
 
       if (!isLoading) {
           clearInterval(intervalId);
@@ -78,19 +82,12 @@
     // Clear the interval after a certain number of repetitions
     setTimeout(function() {
         clearInterval(intervalId);
-    }, 30000); // Stop after 30 seconds
+    }, 300000); // Stop after 5 minutes
 
     function displayGeneratedImage(uri) {
       // Set background image
       $('#ai-image-div').css('background-image', 'url(' + uri + ')');
     }
-
-
-    // test switch from loading to not  
-    setInterval(function () {
-      $('.loading-container').hide();
-      $('.result-container').css('display', 'flex');
-    }, 3000);
   </script>
 
 {% endblock %}

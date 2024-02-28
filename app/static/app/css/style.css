@@ -310,7 +310,8 @@ p.zodiac-animal.next-form {
 }
 
 #ai-image-container {
-  border-radius: 25px;
+  border-radius: 3vh;
+  margin-top: 3vh;
   margin-left: 8vw;
   margin-right: 8vw;
   display: flex;
@@ -324,11 +325,17 @@ p.zodiac-animal.next-form {
 }
 
 #ai-image-div {
-  background-image: url(https://cdn.discordapp.com/attachments/1124768570157564029/1211759743371321424/ramlimunanx573_objectcharacter_chinese_zodiac_dragon_pixel_art__1b78de52-2033-44d0-a8c3-d2c500f0dbca.png?ex=65ef5e34&is=65dce934&hm=a924c264c19e1268d859acc21c79cf59edd3e43a195fabf258a5cb2cf7cf38e1&width=1024&height=1024);
+  background-image: url(https://cdn.discordapp.com/attachments/1124768570157564029/1212424746810212352/ella299510_objectcharacter_chinese_zodiac_Rabbit_pixel_art_char_12878bb5-b417-43fe-85c5-cbd50f6059ac.png?ex=65f1c989&is=65df5489&hm=e463f73781cd37f59856275dddbae24033ade2d3691bee9bbff071a245d1b5bb&width=1024&height=1024);
   background-size: cover;
   width: 168vw;
   height: 84vw;
-  margin-top: 3vh;
+}
+
+@media (min-height: 800px) {
+  .result.title {
+    margin-top: 6vh;
+    margin-bottom: 4vh;
+  }
 }
 
 /********** Loading Screen ***********/
