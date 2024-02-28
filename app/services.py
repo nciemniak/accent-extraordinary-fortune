@@ -10,10 +10,10 @@ class MyMidjourneyAPI:
           "Authorization": f"Bearer {self.api_key}",
     }
 
-  def image_to_image(self):
+  def image_to_image(self, zodiac_animal, image_url):
     url = "https://api.mymidjourney.ai/api/v1/midjourney/imagine"
     data = {
-      "prompt": "https://media.newyorker.com/photos/5909744ec14b3c606c1085ad/master/w_2560%2Cc_limit/040823_r13315.jpg <object/character> chinese zodiac dragon pixel art character, cute, low res. 8 bit, pixel art, 100% black background --q 0.5"
+      "prompt": f"{image_url} <object/character> chinese zodiac {zodiac_animal} pixel art character, cute, low res. 8 bit, pixel art, 100% black background --q 0.5"
     }
 
     try:

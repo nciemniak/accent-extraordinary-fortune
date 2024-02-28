@@ -21,6 +21,7 @@
         {% csrf_token %}
         {{ form }}
         <input type="hidden" id="zodiac_id" name='zodiac_id' value="{{ zodiac_id }}">
+        <input type="hidden" id="uploaded_image_url" name='uploaded_image_url'>
         <button id="upload-image" hidden type="submit">Upload</button>
       </form>
     </div>
@@ -32,12 +33,43 @@
     }
 
     $(document).ready(function() {
-    // Automatically upload when an image is selected 
+    // Upload to temporary location
     $('#id_image').change(function() {
-        if ($(this).val() !== '') {
-            $('#upload-image').click();
-        }
+      uploadImageToTempURL();
+
     });
-});
+  });
+
+  function uploadImageToTempURL() {
+    var fileInput = document.getElementById('id_image');
+    
+    // Check if a file is selected
+    if (fileInput.files.length > 0) {
+        var file = fileInput.files[0];
+
+        // Create FormData object and append the file
+        var formData = new FormData();
+        formData.append('file', file, file.name);
+
+        // Make a POST request using Fetch API
+        fetch('https://tmpfiles.org/api/v1/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            initialUrl = data.data.url;
+            var modifiedUrl = initialUrl.replace(/^(https?:\/\/[^\/]+)(\/.*)?$/, '$1/' + 'dl' + '$2');
+
+            $('#uploaded_image_url').val(modifiedUrl);
+            $('#upload-image').click();
+        })
+        .catch(error => {
+            console.error('Error uploading image:', error);
+        });
+    } else {
+        console.warn('No file selected.');
+    }
+}
   </script>
 {% endblock %}
