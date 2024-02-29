@@ -16,8 +16,8 @@ class Zodiac(models.Model):
   
   @property
   def title(self):
-    text = f"{self.element} {self.animal}!"
-    return text.upper()
+    text = f"{self.element} {self.animal}"
+    return text
   
 
 class Image(models.Model):

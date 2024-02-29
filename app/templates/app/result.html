@@ -1,12 +1,12 @@
 {% extends 'app/base.html' %}
 
-{% block back_button_url %}{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac_id }}{% endblock %}
+{% block back_button_url %}{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac.id }}{% endblock %}
 
 {% block content %}
   {% load static %}
   <div hidden class="result-container">
     <div>
-      <h2 class="result title">Your Zodiac Persona!</h2>
+      <h2 class="result title">I am Year of the <br>{{ zodiac.title | title }}!</h2>
       <div id="ai-image-container">
         <div id="ai-image-div">
         </div>
@@ -28,7 +28,8 @@
     function checkMidjourneyTaskProgress() {
       // URL for the Django view
       domain = getDomain();
-      var djangoViewUrl = `https://${domain}/midjourney_task_progress?message_id={{ message_id }}`;
+      http_protocol = getHttpProtocol();
+      var djangoViewUrl = `${http_protocol}://${domain}/midjourney_task_progress?message_id={{ message_id }}`;
 
       // Make an AJAX call using the fetch API
       fetch(djangoViewUrl, {
@@ -61,6 +62,14 @@
         return window.location.host;
       } else {
         return window.location.hostname;
+      }
+    }
+
+    function getHttpProtocol() {
+      if (window.location.hostname == 'localhost' || window.location.hostname == '127.0.0.1') {
+        return 'http';
+      } else {
+        return 'https';
       }
     }
 

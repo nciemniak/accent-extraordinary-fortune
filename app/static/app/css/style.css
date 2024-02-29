@@ -21,7 +21,7 @@ a {
 }
 
 body {
-  background-color: #000000;
+  background-color: black;
   width: 100%;
   height: 100%;
   max-width: 100%;
@@ -34,6 +34,7 @@ body {
 }
 
 .top-nav {
+  background-color: black;
   height: 70px;
   display: flex;
   flex-direction: column;
@@ -49,6 +50,24 @@ body {
 
 .back-button img {
   width: 24px;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  body {
+    background-color: #362929;
+  }
+
+  .resizing-container {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 360px;
+    height: 680px;
+  }
 }
 
 
@@ -95,7 +114,7 @@ body {
 }
 
 .credit-subtitle {
-  font-size: 28px;
+  font-size: 26px;
   line-height: 35px;
   margin-bottom: 100px;
 }
@@ -149,10 +168,23 @@ input#birthday {
   }
 }
 
+@media (min-height: 800px) {
+  .home-container {
+    margin-top: 90px;
+  }
+}
+
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .home-container {
+    margin-top: 0px;
     background-image: url(../images/home_background.png);
+  }
+
+  .credit-subtitle {
+    font-size: 28px;
+    line-height: 45px;
+    margin-bottom: 95px;
   }
 }
 
@@ -170,11 +202,12 @@ input#birthday {
 /********** Zodiac Animal Page ***********/
 
 .zodiac-animal-container {
+  background-color: black;
   align-items: center;
   width: 100%;
-  height: -webkit-calc(100% - 70px);
-  height:    -moz-calc(100% - 70px);
-  height:         calc(100% - 70px);
+  height: -webkit-calc(100vh - 70px);
+  height:    -moz-calc(100vh - 70px);
+  height:         calc(100vh - 70px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -239,20 +272,47 @@ p.zodiac-animal.next-form {
   .subtitle.zodiac-animal {
     margin-bottom: 1.5vh;
   }
-  
+}
+
+@media (min-width: 768px) {
+  .zodiac-animal-container {
+    height: 610px;
+  }
+
+  .title.zodiac-animal {
+    font-size: 35px;
+  }
+
+  .big-subtitle.zodiac-animal {
+    font-size: 60px;
+  }
+
+  .subtitle.zodiac-animal {
+    font-size: 25px;
+  }
+
+  .traits.zodiac-animal {
+    font-size: 30px;
+  }
+
+  p.zodiac-animal.next-form {
+    font-size: 15px;
+  }
 }
 
 /********** Upload Selfie Page ***********/
 
 .upload-selfie-container {
+  background-color: black;
   background-image: url(../images/selfie_upload_bg_2.png);
   background-size:cover;
-  background-position: center;
+  background-position-x: center;
+  background-position-y: 0px;
   align-items: center;
   width: 100%;
-  height: -webkit-calc(100% - 90px);
-  height:    -moz-calc(100% - 90px);
-  height:         calc(100% - 90px);
+  height: -webkit-calc(100vh - 90px);
+  height:    -moz-calc(100vh - 90px);
+  height:         calc(100vh - 90px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -278,8 +338,30 @@ p.zodiac-animal.next-form {
   margin-top: 8vh;
 }
 
+.loader-icon {
+  margin-top: 20px;
+  text-align: center;
+}
+
 #id_image {
   display: none;
+}
+
+@media (min-width: 768px) {
+  .title.upload-selfie {
+    font-size: 46px;
+    margin-top: 130px;
+  }
+
+  .select-image {
+    font-size: 35px;
+    margin-top: 50px;
+  }
+
+  .upload-selfie-container {
+    background-position: center;
+    height: 610px;
+  }
 }
 
 
@@ -292,7 +374,7 @@ p.zodiac-animal.next-form {
 }
 
 .title.result {
-  font-size: 11vw;
+  font-size: 10.5vw;
   margin-bottom: 3vh;
   margin-top: 2vh;
 }
@@ -303,10 +385,11 @@ p.zodiac-animal.next-form {
   justify-content: space-between;
   overflow: hidden;
   width: 100%;
-  height: -webkit-calc(100% - 70px);
-  height:    -moz-calc(100% - 70px);
-  height:         calc(100% - 70px);
+  height: -webkit-calc(100vh - 70px);
+  height:    -moz-calc(100vh - 70px);
+  height:         calc(100vh - 70px);
   display: hidden;
+  background-color: black;
 }
 
 #ai-image-container {
@@ -334,6 +417,28 @@ p.zodiac-animal.next-form {
   .result.title {
     margin-top: 6vh;
     margin-bottom: 4vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .result-container {
+    height: 610px;
+  }
+
+  .title.result {
+    font-size: 35px;
+  }
+
+  #ai-image-container {
+    width: 290px;
+    height: 290px;
+    margin-left: 35px;
+    margin-right: 35px;
+  }
+
+  #ai-image-div {
+    width: 580px;
+    height: 290px;
   }
 }
 
@@ -399,4 +504,15 @@ div.loading {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  background-color: black;
+}
+
+@media (min-width: 768px) {
+  #loading-text {
+    font-size: 35px;
+  }
+
+  #loading-subtext {
+    font-size: 23px;
+  }
 }

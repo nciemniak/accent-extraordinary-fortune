@@ -46,17 +46,17 @@ def upload_selfie(request):
 def result(request):
   if request.method == 'POST':
     zodiac_id = request.POST.get("zodiac_id", None)
+    zodiac = get_object_or_404(Zodiac, pk=zodiac_id)
     image_url = request.POST.get("uploaded_image_url", None)
-    zodiac_animal = get_object_or_404(Zodiac, pk=zodiac_id).animal
 
     form = ImageForm(request.POST, request.FILES)
     if form.is_valid():
         # Initialize the MyMidjourneyImageToImageAPI service
         mymidjourney_api = MyMidjourneyAPI()
         # Perform image transformation
-        message_id = mymidjourney_api.image_to_image(zodiac_animal, image_url)
+        message_id = mymidjourney_api.image_to_image(zodiac.animal, image_url)
 
-        return render(request, "app/result.html", { "show_navbar": True, "message_id": message_id, "zodiac_id": zodiac_id })
+        return render(request, "app/result.html", { "show_navbar": True, "message_id": message_id, "zodiac": zodiac })
   elif request.method == 'GET':
     return render(request, "app/result.html", { "show_navbar": True, 'message_id': 111 })
 

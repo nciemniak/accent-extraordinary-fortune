@@ -2,32 +2,43 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accent Extraordinary Fortune</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accent Extraordinary Fortune</title>
 
-     <!-- font -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
-     <!-- jQuery -->
-     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-     
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
 
 </head>
-<body>
-  {% if show_navbar %}
-    <div class="top-nav">
-      <a href="{% block back_button_url %}{% url 'app:index' %}{% endblock %}" class="back-button">
-        <img src="{% static 'app/svg/backbutton.svg' %}" alt="Go Back"></img>
-      </a>
-    </div>
-  {% endif %}
 
-  {% block content %}{% endblock %}
+<body>
+  <div class="flex-container">
+    <div class="resizing-container">
+      {% if show_navbar %}
+        <div class="top-nav">
+          <a href="{% block back_button_url %}{% url 'app:index' %}{% endblock %}" class="back-button">
+            <img src="{% static 'app/svg/backbutton.svg' %}" alt="Go Back"></img>
+          </a>
+        </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+      <div class="content-container">
+        
+      </div>
+
+    </div>
+  </div>
 </body>
+
 </html>
