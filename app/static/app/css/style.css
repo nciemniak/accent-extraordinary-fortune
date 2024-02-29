@@ -374,9 +374,7 @@ p.zodiac-animal.next-form {
 }
 
 .title.result {
-  font-size: 10.5vw;
-  margin-bottom: 3vh;
-  margin-top: 2vh;
+  font-size: 10vw;
 }
 
 .result-container {
@@ -394,7 +392,6 @@ p.zodiac-animal.next-form {
 
 #ai-image-container {
   border-radius: 3vh;
-  margin-top: 3vh;
   margin-left: 8vw;
   margin-right: 8vw;
   display: flex;
@@ -413,6 +410,28 @@ p.zodiac-animal.next-form {
   height: 84vw;
 }
 
+.fortune-link {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#fortune-link {
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#fortune-link h4 {
+  text-align: center;
+}
+
+#fortune-link img {
+  width: 16px;
+  margin-left: 5px;
+  position: relative;
+  top: 3px;
+
+}
+
 @media (min-height: 800px) {
   .result.title {
     margin-top: 6vh;
@@ -427,6 +446,8 @@ p.zodiac-animal.next-form {
 
   .title.result {
     font-size: 35px;
+    margin-bottom: 0px;
+    margin-top: 0px;
   }
 
   #ai-image-container {
@@ -434,6 +455,7 @@ p.zodiac-animal.next-form {
     height: 290px;
     margin-left: 35px;
     margin-right: 35px;
+    margin-top: 0px;
   }
 
   #ai-image-div {
@@ -443,6 +465,18 @@ p.zodiac-animal.next-form {
 }
 
 /********** Loading Screen ***********/
+
+.loading-container {
+  width: 100%;
+  max-width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  text-align: center;
+}
 
 @keyframes loading-text-opacity {
   0%  {opacity: 0}
@@ -483,10 +517,6 @@ p.zodiac-animal.next-form {
   margin-bottom: 3vh;
 }
 
-div.loading {
-  margin-top: 28vh;
-}
-
 #loading-subtext {
   font-size: 6vw;
   text-align: center;
@@ -496,15 +526,8 @@ div.loading {
   margin-right: 15px;
 }
 
-.loading-container {
-  width: 100%;
-  max-width: 100%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: black;
+div.loading {
+  margin-top: 28vh;
 }
 
 @media (min-width: 768px) {
@@ -514,5 +537,50 @@ div.loading {
 
   #loading-subtext {
     font-size: 23px;
+  }
+}
+
+/********** Credits Screen ***********/
+
+.credits-container {
+  width: 100%;
+  max-width: 100%;
+  height: 90%;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  text-align: center;
+}
+
+.title.credits {
+  margin-top: 9vh;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14vw;
+  margin-bottom: 3vh;
+}
+
+.credits p {
+  line-height: 40px;
+  color: white;
+  font-size: 7.5vw;
+  text-align: center;
+  color: white;
+  position: relative;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .title.credits {
+    margin-top: 40px;
+    font-size: 50px;
+  }
+
+  .credits p {
+    font-size: 25px;
+    line-height: 32px;
   }
 }

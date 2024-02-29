@@ -37,12 +37,7 @@ class MyMidjourneyAPI:
 
     try:
       response = requests.get(url, headers=self.headers)
-      data = response.json()
-
-      if 'progress' in data and data['progress'] == 100:
-        return {"data": data['uri']}
-      else:
-        return {"data": "loading"}
+      return response.json()
       
     except requests.exceptions.RequestException as e:
       print(f"Error: {e}")
