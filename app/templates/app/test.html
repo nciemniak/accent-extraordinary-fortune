@@ -3,37 +3,91 @@
 {% block back_button_url %}{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac_id }}{% endblock %}
 
 {% block content %}
-  {% load static %}
-  <div id="test-image-container">
-    <div id="box">
-    </div>
+{% load static %}
+<div hidden id="test-image-container">
+  <div id="box">
+    <!-- Example: File input and upload button -->
+    <input type="file" id="imageInput">
+    <button onclick="uploadImage()">Upload Image to Cloudinary</button>
   </div>
+</div>
 
-  <script>
-    // URL for the Django view
-    var djangoViewUrl = 'http://127.0.0.1:8000/midjourney_task_progress?message_id={{ message_id }}';
+<div id="dropbox">
+  <h1>Client-Side Upload to Cloudinary with JavaScript</h1> Learn more in this blog post - <a
+    href="https://cloudinary.com/blog/direct_upload_made_easy_from_browser_or_mobile_app_to_the_cloud">Direct upload
+    made easy from browser or mobile app to the cloud</a>
 
-    // Make an AJAX call using the fetch API
-    fetch(djangoViewUrl, {
-      method: 'GET',  // You can change this to 'POST' or other HTTP methods if needed
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Handle the data received from the Django view
-      console.log('Data from Django:', data);
-      // You can update your UI or perform other actions based on the data
-    })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-    });
+  <form class="my-form">
+    <div class="form_line">
+      <h4>Upload multiple files by clicking the link below or by dragging and dropping images onto the dashed region
+      </h4>
+      <div class="form_controls">
+        <div class="upload_button_holder">
+          <input type="file" id="fileElem" multiple accept="image/*" style="display:none"
+            onchange="handleFiles(this.files)">
+          <a href="#" id="fileSelect">Select some files</a>&nbsp;&nbsp;
+          <a href="#" id="urlSelect">URL Upload</a>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="progress-bar" id="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+  <div id="gallery" />
+</div>
+</div>
 
-  </script>
+<script type="text/javascript">
+  const cloudName = 'nciemniak';
+  const unsignedUploadPreset = 'oafxfgsy';
+
+  const fileSelect = document.getElementById("fileSelect");
+  const fileElem = document.getElementById("fileElem");
+
+  fileSelect.addEventListener("click", function (e) {
+    if (fileElem) {
+      fileElem.click();
+    }
+    e.preventDefault(); // prevent navigation to "#"
+  }, false);
+
+
+  // *********** Upload file to Cloudinary ******************** //
+  function uploadFile(file) {
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    const fd = new FormData();
+    fd.append('upload_preset', unsignedUploadPreset);
+    fd.append('tags', 'browser_upload'); // Optional - add tags for image admin in Cloudinary
+    fd.append('file', file);
+
+    fetch(url, {
+      method: 'POST',
+      body: fd,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.secure_url);
+        // File uploaded successfully
+        const url = data.secure_url;
+        // Create a thumbnail of the uploaded image, with 150px width
+        const img = new Image();
+        img.src = data.secure_url;
+        img.alt = data.public_id;
+        document.getElementById('gallery').appendChild(img);
+      })
+      .catch((error) => {
+        console.error('Error uploading the file:', error);
+      });
+  }
+
+  // *********** Handle selected files ******************** //
+  const handleFiles = function (files) {
+    for (let i = 0; i < files.length; i++) {
+      uploadFile(files[i]); // call the function to upload the file
+    }
+  };
+
+
+</script>
 {% endblock %}

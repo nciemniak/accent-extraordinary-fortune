@@ -67,7 +67,3 @@ def midjourney_task_progress(request):
   mymidjourney_api = MyMidjourneyAPI()
   data = mymidjourney_api.progress(message_id)
   return JsonResponse(data)
-
-
-def test_view(request):
-  return render(request, "app/test.html")

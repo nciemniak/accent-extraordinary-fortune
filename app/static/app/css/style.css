@@ -375,6 +375,7 @@ p.zodiac-animal.next-form {
 
 .title.result {
   font-size: 10vw;
+  margin-bottom: 8px;
 }
 
 .result-container {
@@ -383,11 +384,11 @@ p.zodiac-animal.next-form {
   justify-content: space-between;
   overflow: hidden;
   width: 100%;
-  height: -webkit-calc(100vh - 70px);
-  height:    -moz-calc(100vh - 70px);
-  height:         calc(100vh - 70px);
-  display: hidden;
+  height: -webkit-calc(100vh - 140px);
+  height:    -moz-calc(100vh - 140px);
+  height:         calc(100vh - 140px);
   background-color: black;
+  display: hidden;
 }
 
 #ai-image-container {
@@ -410,14 +411,12 @@ p.zodiac-animal.next-form {
   height: 84vw;
 }
 
-.fortune-link {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 #fortune-link {
-  font-size: 17px;
+  position: absolute;
+  font-size: 20px;
   cursor: pointer;
+  bottom: 27px;
+  right: 30px;
 }
 
 #fortune-link h4 {
@@ -429,13 +428,12 @@ p.zodiac-animal.next-form {
   margin-left: 5px;
   position: relative;
   top: 3px;
-
 }
 
 @media (min-height: 800px) {
   .result.title {
-    margin-top: 6vh;
-    margin-bottom: 4vh;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
   }
 }
 
@@ -446,7 +444,7 @@ p.zodiac-animal.next-form {
 
   .title.result {
     font-size: 35px;
-    margin-bottom: 0px;
+    margin-bottom: 8px;
     margin-top: 0px;
   }
 
@@ -462,6 +460,10 @@ p.zodiac-animal.next-form {
     width: 580px;
     height: 290px;
   }
+  #fortune-link {
+    border: 8px solid black;
+    background-color: black;
+  }
 }
 
 /********** Loading Screen ***********/
@@ -470,12 +472,12 @@ p.zodiac-animal.next-form {
   width: 100%;
   max-width: 100%;
   height: 90%;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   background-color: black;
   text-align: center;
+  display: flex;
 }
 
 @keyframes loading-text-opacity {
@@ -555,17 +557,22 @@ div.loading {
 }
 
 .title.credits {
-  margin-top: 9vh;
+  margin-top: 3vh;
   color: #ffffff;
   text-align: center;
   font-size: 14vw;
   margin-bottom: 3vh;
 }
 
-.credits p {
-  line-height: 40px;
+h4.credits {
   color: white;
-  font-size: 7.5vw;
+  font-size: 8.5vw;
+}
+
+.credits p {
+  line-height: 30px;
+  color: white;
+  font-size: 6.5vw;
   text-align: center;
   color: white;
   position: relative;
@@ -575,12 +582,100 @@ div.loading {
 
 @media (min-width: 768px) {
   .title.credits {
-    margin-top: 40px;
-    font-size: 50px;
+    margin-top: 20px;
+    font-size: 55px;
   }
 
   .credits p {
-    font-size: 25px;
+    font-size: 20px;
     line-height: 32px;
+  }
+
+  h4.credits {
+    font-size: 24px;
+    line-height: 27px;
+  }
+}
+
+/********** Fortune Screen ***********/
+
+.fortune-container {
+  background-color: black;
+  align-items: center;
+  width: 100%;
+  height: -webkit-calc(100vh - 70px);
+  height:    -moz-calc(100vh - 70px);
+  height:         calc(100vh - 70px);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden;
+  display: none;
+}
+
+.title.fortune {
+  position: relative;
+  color: white;
+  font-size: 7.5vw;
+  margin-bottom: 10vh;
+  margin-top: 2vh;
+  z-index: 10;  
+}
+
+p.fortune-text {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-size: 10.5vw; 
+  margin-left: 15px;
+  margin-right: 15px;
+  line-height: 7vh;
+  z-index: 10;
+}
+
+img#red-lantern {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  width: 150px;
+  overflow: hidden;
+}
+
+img#fortune-stick {
+  width: 180px;
+  position: absolute; /* or 'absolute' based on your specific requirements */
+  bottom: 50px;
+  left: 0;  
+  z-index: 5;
+}
+
+.credits-link {
+  font-size: 20px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: 36px;
+}
+
+.credits-link img {
+  width: 16px;
+  margin-left: 5px;
+  position: relative;
+  top: 3px;
+}
+
+@media (min-width: 768px) {
+  .title.fortune {
+    font-size: 30px;
+  }
+
+  p.fortune-text {
+    font-size: 40px; 
+  }
+}
+
+@media (min-width: 768px) {
+  .fortune-container {
+    height: 610px;
   }
 }

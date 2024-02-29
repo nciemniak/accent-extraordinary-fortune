@@ -3,7 +3,10 @@
 {% block back_button_url %}{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac.id }}{% endblock %}
 
 {% block content %}
+
   {% load static %}
+  <input type="hidden" id="upload-selfie-url" value="{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac.id }}">
+
   <div class="loading-container">
     <div class="loading">
       <h3 id="loading-text">loading...</h3>
@@ -18,31 +21,52 @@
         <div id="ai-image-div">
         </div>
       </div>
-      <a id="fortune-link">
-        <h4>read your fortune <img src="{% static 'app/svg/next.svg' %}"></img></h4>
-      </a>
     </div>
     <img id="gold-bullion" src="{% static 'app/images/gold_bullion.png' %}"></img>
+    <a onclick="goToFortunePage()" id="fortune-link">
+      <h4>Read your fortune <img src="{% static 'app/svg/next.svg' %}"></img></h4>
+    </a>
   </div>
 
-  <div hidden class="fortune-container">
+  <div class="fortune-container">
+    <img id="red-lantern" src="{% static 'app/images/red_lantern.png' %}"></img>
     <div>
-
+      <h2 class="fortune title">
+        Your 2024 Fortune is...
+      </h2>
+      <p class="fortune-text">Monk who sweeps the floor at the temple but secretly learns the Seven Rungs of Kung Fu </p>
     </div>
+    <img id="fortune-stick" src="{% static 'app/images/fortune_stick_1.png' %}"></img>
+    <p class="credits-link">
+      <a href="javascript:goToCreditsPage()">
+        <span>Credits</span>
+        <img src="{% static 'app/svg/next.svg' %}"></img>
+      </a>
+    </p>
   </div>
 
   <div class="credits-container">
     <div class="credits">
       <h2 class="credits title">CREDITS</h2>
-      <p>
-        John Tsung
+        <h4 class="credits">Concept, Fortunes</h4>
+        <p>Hongru Pan</p>
         <br>
-        Nicole Ciemniak
+        <h4 class="credits">Concept, Fortunes, Zodiac</h4>
+        <p>John Tsung</p>
         <br>
-        Koi
+        <h4 class="credits">Concept, Design</h4>
+        <p>Koi Ren</p>
         <br>
-        Hongru
-      </p>
+        <h4 class="credits">Development, AI, Design
+        </h4>
+        <p>Nicole Ciemniak</p>
+        <br>
+        <h4 class="credits">Consultation</h4>
+        <p>Aaron Rasmussen, Sean Ritzie</p>
+        <br>
+        <h4 class="credits">Art Collectives</h4>
+        <p>GATSA & Accent Temple</p>
+
     </div>
   </div>
 
@@ -116,6 +140,39 @@
     setTimeout(function() {
         clearInterval(intervalId);
     }, 300000); // Stop after 5 minutes
+
+    function goToFortunePage() {
+      $('.result-container').css('display', 'none');
+      $('.credits-container').css('display', 'none'); 
+      $('.fortune-container').css('display', 'flex');
+
+      // update link for back button
+      $('.top-nav a').click(function(e) {
+        e.preventDefault();
+        goToResultsPage();
+      });
+    }
+
+    function goToResultsPage() {
+      $('.fortune-container').css('display', 'none');
+      $('.result-container').css('display', 'flex');
+      $('.top-nav a').off('click');
+
+      uploadSelfieUrl = $('#upload-selfie-url').val();
+      $('.top-nav a').attr('href', uploadSelfieUrl);
+    }
+
+    function goToCreditsPage() {
+      $('.fortune-container').css('display', 'none');
+      $('.credits-container').css('display', 'flex');
+      $('.top-nav a').off('click');
+
+      // update link for back button
+      $('.top-nav a').click(function(e) {
+        e.preventDefault();
+        goToFortunePage();
+      });
+    }
   </script>
 
 {% endblock %}
