@@ -548,7 +548,6 @@ div.loading {
 .re-submit-request button {
   padding: 6px 20px;
   font-size: 13px;
-  display: none;
 }
 
 @media (min-width: 768px) {
