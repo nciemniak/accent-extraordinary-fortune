@@ -36,7 +36,12 @@
   </div>
 
   <script>
-
+    $(document).ready(function() {
+        if(window.innerWidth < 768) {
+          var height = window.innerHeight - 70;
+          $('.zodiac-animal-container').height(height);
+        }
+    });
   </script>
 {% endblock %}
 
