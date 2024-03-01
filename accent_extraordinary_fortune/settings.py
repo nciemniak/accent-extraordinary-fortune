@@ -29,7 +29,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 MYMIDJOURNEY_API_KEY = os.environ.get('MYMIDJOURNEY_API_KEY')
 
-ALLOWED_HOSTS = [".vercel.app", ".now.sh", "localhost"]
+ALLOWED_HOSTS = ["accenttemple.com", "www.accenttemple.com", ".vercel.app", ".now.sh", "localhost"]
 
 
 # Application definition
