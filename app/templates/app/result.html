@@ -4,85 +4,99 @@
 
 {% block content %}
 
-  {% load static %}
-  <input type="hidden" id="upload-selfie-url" value="{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac.id }}">
+{% load static %}
+<input type="hidden" id="upload-selfie-url" value="{% url 'app:upload_selfie' %}?zodiac_id={{ zodiac.id }}">
 
-  <div class="loading-container">
-    <div class="loading">
-      <h3 id="loading-text">loading...</h3>
-      <h4 id="loading-subtext">Your image is being generated! This may take up to 60 seconds.</h4>
+<div class="loading-container">
+  <div class="loading">
+    <h3 id="loading-text">loading...</h3>
+    <h4 id="loading-subtext">Your image is being generated! This may take up to 60 seconds.</h4>
+    <div class="re-submit-request">
+      <p>Server taking too long to respond? You can re-submit your request below:</p>
+      <button type="button" onclick="redoRequest()">Redo Request</button>
     </div>
   </div>
 
-  <div hidden class="result-container">
-    <div>
-      <h2 class="result title">I am Year of the <br>{{ zodiac.title | title }}!</h2>
-      <div id="ai-image-container">
-        <div id="ai-image-div">
-        </div>
+  <form id="redo-request" hidden action="{% url 'app:result' %}?zodiac_id={{ zodiac.id }}" method="post"
+    enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" id="zodiac_id" name='zodiac_id' value="{{ zodiac.id }}">
+    <input type="hidden" id="uploaded_image_url" name='uploaded_image_url' value="{{ image_url }}">
+    <button id="redo-request-button" hidden type="submit">Submit</button>
+  </form>
+</div>
+
+<div hidden class="result-container">
+  <div>
+    <h2 class="result title">I am Year of the <br>{{ zodiac.title | title }}!</h2>
+    <div id="ai-image-container">
+      <div id="ai-image-div">
       </div>
     </div>
-    <img id="gold-bullion" src="{% static 'app/images/gold_bullion.png' %}"></img>
-    <a onclick="goToFortunePage()" id="fortune-link">
-      <h4>Read your fortune <img src="{% static 'app/svg/next.svg' %}"></img></h4>
-    </a>
   </div>
+  <img id="gold-bullion" src="{% static 'app/images/gold_bullion.png' %}"></img>
+  <a onclick="goToFortunePage()" id="fortune-link">
+    <h4>Read your fortune <img src="{% static 'app/svg/next.svg' %}"></img></h4>
+  </a>
+</div>
 
-  <div class="fortune-container">
-    <img id="red-lantern" src="{% static 'app/images/red_lantern.png' %}"></img>
-    <div>
-      <h2 class="fortune title">
-        Your 2024 Fortune is...
-      </h2>
-      <p class="fortune-text">Monk who sweeps the floor at the temple but secretly learns the Seven Rungs of Kung Fu </p>
-    </div>
-    <img id="fortune-stick" src="{% static 'app/images/fortune_stick_1.png' %}"></img>
-    <p class="credits-link">
-      <a href="javascript:goToCreditsPage()">
-        <span>Credits</span>
-        <img src="{% static 'app/svg/next.svg' %}"></img>
-      </a>
+<div class="fortune-container">
+  <img id="red-lantern" src="{% static 'app/images/red_lantern.png' %}"></img>
+  <div>
+    <h2 class="fortune title">
+      Your 2024 Fortune is...
+    </h2>
+    <p class="fortune-text">
+      {{ fortune }}
     </p>
   </div>
+  <img id="fortune-stick" src="{% static 'app/images/fortune_stick_1.png' %}"></img>
+  <p class="credits-link">
+    <a href="javascript:goToCreditsPage()">
+      <span>Credits</span>
+      <img src="{% static 'app/svg/next.svg' %}"></img>
+    </a>
+  </p>
+</div>
 
-  <div class="credits-container">
-    <div class="credits">
-      <h2 class="credits title">CREDITS</h2>
-        <h4 class="credits">Concept, Fortunes</h4>
-        <p>Hongru Pan</p>
-        <br>
-        <h4 class="credits">Concept, Fortunes, Zodiac</h4>
-        <p>John Tsung</p>
-        <br>
-        <h4 class="credits">Concept, Design</h4>
-        <p>Koi Ren</p>
-        <br>
-        <h4 class="credits">Development, AI, Design
-        </h4>
-        <p>Nicole Ciemniak</p>
-        <br>
-        <h4 class="credits">Consultation</h4>
-        <p>Aaron Rasmussen, Sean Ritzie</p>
-        <br>
-        <h4 class="credits">Art Collectives</h4>
-        <p>GATSA & Accent Temple</p>
+<div class="credits-container">
+  <div class="credits">
+    <h2 class="credits title">CREDITS</h2>
+    <h4 class="credits">Concept, Fortunes</h4>
+    <p>Hongru Pan</p>
+    <br>
+    <h4 class="credits">Concept, Fortunes, Zodiac</h4>
+    <p>John Tsung</p>
+    <br>
+    <h4 class="credits">Concept, Design</h4>
+    <p>Koi Ren</p>
+    <br>
+    <h4 class="credits">Development, AI, Design
+    </h4>
+    <p>Nicole Ciemniak</p>
+    <br>
+    <h4 class="credits">Consultation</h4>
+    <p>Aaron Rasmussen, Sean Ritzie</p>
+    <br>
+    <h4 class="credits">Art Collectives</h4>
+    <p>GATSA & Accent Temple</p>
 
-    </div>
   </div>
+</div>
 
-  <script>
+<script>
 
-    function checkMidjourneyTaskProgress() {
-      // URL for the Django view
-      domain = getDomain();
-      http_protocol = getHttpProtocol();
-      var djangoViewUrl = `${http_protocol}://${domain}/midjourney_task_progress?message_id={{ message_id }}`;
+  function checkMidjourneyTaskProgress() {
+    // URL for the Django view
+    domain = getDomain();
+    http_protocol = getHttpProtocol();
+    var djangoViewUrl = `${http_protocol}://${domain}/midjourney_task_progress?message_id={{ message_id }}`;
 
-      // Make an AJAX call using the fetch API
-      fetch(djangoViewUrl, {
-        method: 'GET',
-        mode: 'no-cors',
-      })
+    // Make an AJAX call using the fetch API
+    fetch(djangoViewUrl, {
+      method: 'GET',
+      mode: 'no-cors',
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -92,7 +106,7 @@
       .then(data => {
         // Handle the data received from the Django view
         console.log('Data from Django:', data);
-        
+
         if ('progress' in data && data.progress == 100) {
           displayGeneratedImage(data.uri);
           $('.loading-container').hide();
@@ -102,77 +116,86 @@
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
       });
+  }
+
+  function getDomain() {
+    if (window.location.hostname == 'localhost' || window.location.hostname == '127.0.0.1') {
+      return window.location.host;
+    } else {
+      return window.location.hostname;
     }
+  }
 
-    function getDomain() {
-      if (window.location.hostname == 'localhost' || window.location.hostname == '127.0.0.1') {
-        return window.location.host;
-      } else {
-        return window.location.hostname;
-      }
+  function getHttpProtocol() {
+    if (window.location.hostname == 'localhost' || window.location.hostname == '127.0.0.1') {
+      return 'http';
+    } else {
+      return 'https';
     }
+  }
 
-    function getHttpProtocol() {
-      if (window.location.hostname == 'localhost' || window.location.hostname == '127.0.0.1') {
-        return 'http';
-      } else {
-        return 'https';
-      }
+  function displayGeneratedImage(uri) {
+    // Set background image
+    $('#ai-image-div').css('background-image', 'url(' + uri + ')');
+  }
+
+  // poll the API every 3 seconds for generation progress
+  var intervalId = setInterval(function () {
+    checkMidjourneyTaskProgress();
+
+    var isLoading = $('.result-container').is(':hidden');
+
+    if (!isLoading) {
+      clearInterval(intervalId);
     }
+  }, 3000);
 
-    function displayGeneratedImage(uri) {
-      // Set background image
-      $('#ai-image-div').css('background-image', 'url(' + uri + ')');
-    }
+  // Show "redo" button after 2 minutes
+  setTimeout(function () {
+    $('.re-submit-request').css('display', 'block');
+  }, 120000);
 
-    // poll the API every 3 seconds for generation progress
-    var intervalId = setInterval(function () {
-      checkMidjourneyTaskProgress();
+  function redoRequest() {
+    $("#redo-request-button").click();
+  }
 
-      var isLoading = $('.result-container').is(':hidden');
+  // Stop polling the midjourney API after 6 minutes
+  setTimeout(function () {
+    clearInterval(intervalId);
+  }, 360000); // Stop after 6 minutes
 
-      if (!isLoading) {
-          clearInterval(intervalId);
-      }
-    }, 3000);
+  function goToFortunePage() {
+    $('.result-container').css('display', 'none');
+    $('.credits-container').css('display', 'none');
+    $('.fortune-container').css('display', 'flex');
 
-    // Clear the interval after a certain number of repetitions
-    setTimeout(function() {
-        clearInterval(intervalId);
-    }, 300000); // Stop after 5 minutes
+    // update link for back button
+    $('.top-nav a').click(function (e) {
+      e.preventDefault();
+      goToResultsPage();
+    });
+  }
 
-    function goToFortunePage() {
-      $('.result-container').css('display', 'none');
-      $('.credits-container').css('display', 'none'); 
-      $('.fortune-container').css('display', 'flex');
+  function goToResultsPage() {
+    $('.fortune-container').css('display', 'none');
+    $('.result-container').css('display', 'flex');
+    $('.top-nav a').off('click');
 
-      // update link for back button
-      $('.top-nav a').click(function(e) {
-        e.preventDefault();
-        goToResultsPage();
-      });
-    }
+    uploadSelfieUrl = $('#upload-selfie-url').val();
+    $('.top-nav a').attr('href', uploadSelfieUrl);
+  }
 
-    function goToResultsPage() {
-      $('.fortune-container').css('display', 'none');
-      $('.result-container').css('display', 'flex');
-      $('.top-nav a').off('click');
+  function goToCreditsPage() {
+    $('.fortune-container').css('display', 'none');
+    $('.credits-container').css('display', 'flex');
+    $('.top-nav a').off('click');
 
-      uploadSelfieUrl = $('#upload-selfie-url').val();
-      $('.top-nav a').attr('href', uploadSelfieUrl);
-    }
-
-    function goToCreditsPage() {
-      $('.fortune-container').css('display', 'none');
-      $('.credits-container').css('display', 'flex');
-      $('.top-nav a').off('click');
-
-      // update link for back button
-      $('.top-nav a').click(function(e) {
-        e.preventDefault();
-        goToFortunePage();
-      });
-    }
-  </script>
+    // update link for back button
+    $('.top-nav a').click(function (e) {
+      e.preventDefault();
+      goToFortunePage();
+    });
+  }
+</script>
 
 {% endblock %}

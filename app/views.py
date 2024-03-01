@@ -1,9 +1,13 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils.dateparse import parse_date
+
 from .services import MyMidjourneyAPI
+from .constants import FORTUNES
 
 from datetime import datetime
+import json
+import random
 
 from .models import Zodiac
 from .forms import ImageForm
@@ -49,16 +53,23 @@ def result(request):
     zodiac = get_object_or_404(Zodiac, pk=zodiac_id)
     image_url = request.POST.get("uploaded_image_url", None)
 
-    form = ImageForm(request.POST, request.FILES)
-    if form.is_valid():
-        # Initialize the MyMidjourneyImageToImageAPI service
-        mymidjourney_api = MyMidjourneyAPI()
-        # Perform image transformation
-        message_id = mymidjourney_api.image_to_image(zodiac.animal, image_url)
-
-        return render(request, "app/result.html", { "show_navbar": True, "message_id": message_id, "zodiac": zodiac })
+    # Initialize the MyMidjourneyImageToImageAPI service
+    mymidjourney_api = MyMidjourneyAPI()
+    # Perform image transformation
+    message_id = mymidjourney_api.image_to_image(zodiac.animal, image_url)
+    
+    context = {
+      "show_navbar": True, 
+      "message_id": message_id, 
+      "zodiac": zodiac, 
+      "fortune": _get_random_fortune,
+      "image_url": image_url,
+    }
+    return render(request, "app/result.html", context)
+  
   elif request.method == 'GET':
-    return render(request, "app/result.html", { "show_navbar": True, 'message_id': 111 })
+    fortune = _get_random_fortune()
+    return render(request, "app/result.html", { "show_navbar": True, 'message_id': 111, "fortune": _get_random_fortune })
 
 
 def midjourney_task_progress(request):
@@ -67,3 +78,13 @@ def midjourney_task_progress(request):
   mymidjourney_api = MyMidjourneyAPI()
   data = mymidjourney_api.progress(message_id)
   return JsonResponse(data)
+
+
+def _get_random_fortune():
+  fortunes_list = FORTUNES
+  fortune_number = random.randint(1, 88)
+
+  result = next(
+     (obj for obj in fortunes_list if obj["number"] == fortune_number), None
+  )
+  return result['luck']
