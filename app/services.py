@@ -42,3 +42,32 @@ class MyMidjourneyAPI:
     except requests.exceptions.RequestException as e:
       print(f"Error: {e}")
       return None
+
+
+class MidjourneyGoAPI:
+  def __init__(self):
+    self.headers = {
+          "X-API-KEY": settings.GOAPI_KEY,
+    }
+
+  def image_to_image(self, zodiac_animal, image_url):
+    url = "https://api.midjourneyapi.xyz/mj/v2/imagine"
+    data = {
+      "prompt": f"{image_url} <object/character> chinese zodiac {zodiac_animal} pixel art character, anthropomorphic, cute, low res. 8 bit, pixel art, 100% black background",
+      "aspect_ratio": "1:1",
+      "process_mode": "fast",
+    }
+
+    response = requests.post(url, headers=self.headers, json=data).json()
+    return response['task_id']
+  
+  def progress(self, task_id):
+    url = 'https://api.midjourneyapi.xyz/mj/v2/fetch'
+    data = {
+      'task_id': task_id
+    }
+
+    response = requests.post(url, json=data).json()
+    return response
+
+    

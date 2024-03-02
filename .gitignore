@@ -11,3 +11,4 @@ staticfiles/
 *.DS_Store
 
 chinese_zodiac_table_update_v2.csv
+accent_extraordinary_fortune/cloudinary.py

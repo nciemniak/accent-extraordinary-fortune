@@ -28,9 +28,9 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-&psk#na5l=p3q8
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 MYMIDJOURNEY_API_KEY = os.environ.get('MYMIDJOURNEY_API_KEY')
+GOAPI_KEY = os.environ.get("GOAPI_KEY")
 
 ALLOWED_HOSTS = ["accenttemple.com", "www.accenttemple.com", ".vercel.app", ".now.sh", "localhost"]
-
 
 # Application definition
 

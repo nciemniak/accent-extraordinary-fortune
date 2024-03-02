@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils.dateparse import parse_date
 
-from .services import MyMidjourneyAPI
+from .services import MyMidjourneyAPI, MidjourneyGoAPI
 from .constants import FORTUNES
 
 from datetime import datetime
@@ -47,10 +47,13 @@ def result(request):
     zodiac = get_object_or_404(Zodiac, pk=zodiac_id)
     image_url = request.POST.get("uploaded_image_url", None)
 
-    # Initialize the MyMidjourneyImageToImageAPI service
-    mymidjourney_api = MyMidjourneyAPI()
-    # Perform image transformation
-    message_id = mymidjourney_api.image_to_image(zodiac.animal, image_url)
+    # MyMidjourney
+    # mymidjourney_api = MyMidjourneyAPI()
+    # message_id = mymidjourney_api.image_to_image(zodiac.animal, image_url)
+
+    # GoAPI
+    go_api = MidjourneyGoAPI()
+    message_id = go_api.image_to_image(zodiac.animal, image_url)
 
     context = {
       "show_navbar": True, 
@@ -69,8 +72,12 @@ def result(request):
 def midjourney_task_progress(request):
   message_id = request.GET.get("message_id", None)
 
-  mymidjourney_api = MyMidjourneyAPI()
-  data = mymidjourney_api.progress(message_id)
+  # mymidjourney_api = MyMidjourneyAPI()
+  # data = mymidjourney_api.progress(message_id)
+  
+  go_api = MidjourneyGoAPI()
+  data = go_api.progress(message_id)
+
   return JsonResponse(data)
 
 

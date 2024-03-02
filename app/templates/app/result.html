@@ -107,8 +107,8 @@
         // Handle the data received from the Django view
         console.log('Data from Django:', data);
 
-        if ('progress' in data && data.progress == 100) {
-          displayGeneratedImage(data.uri);
+        if ('status' in data && data.status == 'finished') {
+          displayGeneratedImage(data.task_result.image_url);
           $('.loading-container').hide();
           $('.result-container').css('display', 'flex');
         }
@@ -148,7 +148,7 @@
     if (!isLoading) {
       clearInterval(intervalId);
     }
-  }, 3000);
+  }, 5000);
 
   // Show "long load time" message after 1 minute
   setTimeout(function () {
