@@ -11,19 +11,10 @@
   <div class="loading">
     <h3 id="loading-text">loading...</h3>
     <h4 id="loading-subtext">Your image is being generated! This may take up to 60 seconds.</h4>
-    <div class="re-submit-request">
-      <p>Server taking too long to respond? You can re-submit your request below:</p>
-      <button hidden type="button" onclick="redoRequest()">Redo Request</button>
+    <div class="long-load-time-note">
+      <p>Fortunes are really popular right now.  If it takes too long, come back in a few minutes!</p>
     </div>
   </div>
-
-  <form id="redo-request" hidden action="{% url 'app:result' %}?zodiac_id={{ zodiac.id }}" method="post"
-    enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="hidden" id="zodiac_id" name='zodiac_id' value="{{ zodiac.id }}">
-    <input type="hidden" id="uploaded_image_url" name='uploaded_image_url' value="{{ image_url }}">
-    <button id="redo-request-button" hidden type="submit">Submit</button>
-  </form>
 </div>
 
 <div hidden class="result-container">
@@ -159,15 +150,10 @@
     }
   }, 3000);
 
-  // Show "redo" button after 2 minutes
+  // Show "long load time" message after 1 minute
   setTimeout(function () {
-    $('.re-submit-request').css('display', 'block');
-    $('.re-submit-request button').css('display', 'inline-block');
-  }, 120000);
-
-  function redoRequest() {
-    $("#redo-request-button").click();
-  }
+    $('.long-load-time-note').css('display', 'block');
+  }, 60000);
 
   // Stop polling the midjourney API after 6 minutes
   setTimeout(function () {

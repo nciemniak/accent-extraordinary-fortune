@@ -532,7 +532,7 @@ div.loading {
   margin-top: 28vh;
 }
 
-.re-submit-request p {
+.long-load-time-note p {
   margin-top: 23px;
   margin-bottom: 14px;
   margin-left: 30px;
@@ -541,13 +541,8 @@ div.loading {
   display: hidden;
 }
 
-.re-submit-request {
+.long-load-time-note {
   display: none;
-}
-
-.re-submit-request button {
-  padding: 6px 20px;
-  font-size: 13px;
 }
 
 @media (min-width: 768px) {
