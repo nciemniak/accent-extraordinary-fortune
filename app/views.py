@@ -36,15 +36,9 @@ def zodiac(request):
 
 
 def upload_selfie(request):
-  if request.method == 'POST':
-    form = ImageForm(request.POST, request.FILES)
-    if form.is_valid():
-        form.save()
-
   zodiac_id = request.GET.get("zodiac_id", None)
-  form = ImageForm()
 
-  return render(request, "app/upload_selfie.html", { "show_navbar": True, "zodiac_id": zodiac_id, "form": form })
+  return render(request, "app/upload_selfie.html", { "show_navbar": True, "zodiac_id": zodiac_id })
 
 
 def result(request):
@@ -57,7 +51,7 @@ def result(request):
     mymidjourney_api = MyMidjourneyAPI()
     # Perform image transformation
     message_id = mymidjourney_api.image_to_image(zodiac.animal, image_url)
-    
+
     context = {
       "show_navbar": True, 
       "message_id": message_id, 

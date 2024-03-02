@@ -35,11 +35,11 @@
     <form id="upload-image-form" hidden action="{% url 'app:result' %}?zodiac_id={{ zodiac_id }}" method="post"
       enctype="multipart/form-data">
       {% csrf_token %}
-      {{ form }}
       <input type="hidden" id="zodiac_id" name='zodiac_id' value="{{ zodiac_id }}">
       <input type="hidden" id="uploaded_image_url" name='uploaded_image_url'>
       <button id="upload-image" hidden type="submit">Upload</button>
     </form>
+    <input hidden type="file" name="image" accept="image/*" id="id_image">
   </div>
 </div>
 
@@ -57,7 +57,6 @@
         var file = fileInput.files[0];
         uploadFile(file);
       }
-      
     });
   });
 
