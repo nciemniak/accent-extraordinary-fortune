@@ -27,8 +27,14 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-&psk#na5l=p3q8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
+# Midjourney APIs
 MYMIDJOURNEY_API_KEY = os.environ.get('MYMIDJOURNEY_API_KEY')
 GOAPI_KEY = os.environ.get("GOAPI_KEY")
+
+# Cloudinary
+CLOUD_NAME = os.environ.get('CLOUD_NAME')
+CLOUDINARY_API_KEY = os.environ.get('CLOUDINARY_API_KEY')
+CLOUDINARY_API_SECRET = os.environ.get('CLOUDINARY_API_SECRET')
 
 ALLOWED_HOSTS = ["accenttemple.com", "www.accenttemple.com", ".vercel.app", ".now.sh", "localhost"]
 
