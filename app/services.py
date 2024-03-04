@@ -13,7 +13,7 @@ class MyMidjourneyAPI:
   def image_to_image(self, zodiac_animal, image_url):
     url = "https://api.mymidjourney.ai/api/v1/midjourney/imagine"
     data = {
-      "prompt": f"{image_url} <object/character> chinese zodiac {zodiac_animal} pixel art character, cute, low res. 8 bit, pixel art, 100% black background --q 0.5"
+      "prompt": f"{image_url} chinese zodiac {zodiac_animal} pixel art character, cute, low res. 8 bit, pixel art, 100% black background --q 0.5"
     }
 
     try:
@@ -53,7 +53,7 @@ class MidjourneyGoAPI:
   def image_to_image(self, zodiac_animal, image_url):
     url = "https://api.midjourneyapi.xyz/mj/v2/imagine"
     data = {
-      "prompt": f"{image_url} <object/character> chinese zodiac {zodiac_animal} pixel art character, anthropomorphic, cute, low res. 8 bit, pixel art, 100% black background",
+      "prompt": f"{image_url} chinese zodiac {zodiac_animal} pixel art character, anthropomorphic, cute, low res. 8 bit, pixel art, 100% black background",
       "aspect_ratio": "1:1",
       "process_mode": "fast",
     }
