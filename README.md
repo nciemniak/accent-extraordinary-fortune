@@ -1,0 +1,1 @@
+A zodiac fortune app built in Django/Python, integrating AI image generation from MidJourney. Created for the [Accent Temple](https://www.instagram.com/accent_temple/?hl=en) art collective based in New York.
